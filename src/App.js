@@ -124,7 +124,9 @@ function App() {
   }
   useEffect(() => {
     const storedArray = JSON.parse(localStorage.getItem('Cart'));
+    if(storedArray!==null){
     setCart([...storedArray])
+    }
   }, [])
   // console.log(Cart)
   const removeProduct = (sanpham) => {
