@@ -11,11 +11,9 @@ h1{
 }
 /* font chữ vuông */
 .square-font {
-  /* font-family: 'Arial', sans-serif; Sử dụng font chữ Arial hoặc font mặc định của hệ thống */
   font-weight: bold; /* In đậm chữ */
   text-transform: uppercase; /* Chuyển đổi chữ thành in hoa */
   color: #333; /* Màu chữ */
-  /* text-shadow: 2px 2px 4px rgba(52, 51, 51, 0.5); Đổ bóng văn bản */
   font-size: 24px;
   font-family: 'futura-pt';
 }
