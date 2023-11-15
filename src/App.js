@@ -161,19 +161,18 @@ function App() {
       {/* <Footer /> */}
       <BrowserRouter>
         <div>
-        <Nav List={List} keywords={keywords} getKeywords={getKeywords} soluong={Cart.length} Cart={Cart} setCart={setCart} removeProduct={removeProduct} numberWithCommas={numberWithCommas} size={size} setSize={setSize} />
-          {/* <Routes>
+          <Routes>
             <Route path='/' element={<Nav List={List} keywords={keywords} getKeywords={getKeywords} soluong={Cart.length} Cart={Cart} setCart={setCart} removeProduct={removeProduct} numberWithCommas={numberWithCommas} size={size} setSize={setSize} />} />
             <Route path='/filter/:sample' element={<Nav List={List} keywords={keywords} getKeywords={getKeywords} soluong={Cart.length} Cart={Cart} setCart={setCart} removeProduct={removeProduct} numberWithCommas={numberWithCommas} size={size} setSize={setSize} />} />
             <Route path='/product/:id' element={<Nav List={List} keywords={keywords} getKeywords={getKeywords} soluong={Cart.length} Cart={Cart} setCart={setCart} removeProduct={removeProduct} numberWithCommas={numberWithCommas} size={size} setSize={setSize} />} />
             <Route path='/giohang' element={<Nav List={List} keywords={keywords} getKeywords={getKeywords} soluong={Cart.length} Cart={Cart} setCart={setCart} removeProduct={removeProduct} numberWithCommas={numberWithCommas} size={size} setSize={setSize} />} />
             <Route path='/AuthFormSignUp' element={<Nav List={List} keywords={keywords} getKeywords={getKeywords} soluong={Cart.length} Cart={Cart} setCart={setCart} removeProduct={removeProduct} numberWithCommas={numberWithCommas} size={size} setSize={setSize} />} />
-          </Routes> */}
-          {/* <Routes>
+          </Routes>
+          <Routes>
             <Route path="/" element={<Header />} />
             <Route path="/filter/:sample" element={<Header />} />
             <Route path="/Admin" element={<Header />} />
-          </Routes> */}
+          </Routes>
           <Routes>
             <Route path="/" element={<CartProduct keywords={keywords} List={List} HandleAddProduct={HandleAddProduct} numberWithCommas={numberWithCommas} handleClickSize={handleClickSize} size={size} setSize={setSize} />} />
             <Route path="/filter/:sample" element={<CartProductFilter List={List} HandleAddProduct={HandleAddProduct} numberWithCommas={numberWithCommas} handleClickSize={handleClickSize} size={size} setSize={setSize} />} />
@@ -183,13 +182,13 @@ function App() {
             <Route path='/Admin' element={<Admin/>}/> 
             <Route path='/MainAdmin' element={<MainAdmin List={List} setList={setList} />} />
           </Routes>
-          {/* <Routes>
+          <Routes>
             <Route path='/' element={<Footer />} />
             <Route path='/filter/:sample' element={<Footer />} />
             <Route path='/product/:id' element={<Footer />} />
             <Route path='/giohang' element={<Footer />} />
             <Route path='/AuthFormSignUp' element={<Footer />} />
-          </Routes> */}
+          </Routes>
         </div>
       </BrowserRouter>
     </div>
