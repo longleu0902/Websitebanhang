@@ -84,7 +84,7 @@ function ShowCartProduct({ List, setList, Cart, setCart, HandleAddProduct, numbe
                         </div>
                     </div>
                     <button onClick={() => HandleAddProduct(productDetail)} className='btn-pay' style={{ padding: '16px 24px', margin: '0' }}>Thêm vào giỏ hàng</button>
-                    <div style={{ margin: '24px 0px', color: '#ccc' }} >
+                    <div className='attention' style={{ margin: '24px 0px', color: '#ccc' }} >
                         Lưu ý: <br></br>
                         <br></br>
                         Giá sản phẩm đã bao gồm VAT, không bao gồm phí giao hàng.<br></br>Thời gian giao

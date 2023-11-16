@@ -1,10 +1,13 @@
 import react, { useEffect } from 'react'
 import { Route, Routes, NavLink, BrowserRouter, useNavigate, useLocation } from 'react-router-dom';
-import { Empty, Input, Space, message } from 'antd';
+import { Empty, Input, Space, message, Button, Menu } from 'antd';
 import AuthFormLogin from './AuthForm';
 import AuthFormSignUp from './AuthFormSignUp';
 import { useState } from 'react';
-import { AudioOutlined } from '@ant-design/icons';
+import {
+  AudioOutlined,
+  MenuOutlined,
+} from '@ant-design/icons';
 import { getAuth, GoogleAuthProvider, signInWithPopup, FacebookAuthProvider } from "firebase/auth";
 import { db } from '../firebase-config';
 import { auth } from "../firebase-config"
@@ -145,6 +148,7 @@ function Nav({ Cart, setCart, soluong, removeProduct, removeAllProdcut, numberWi
     setUserLogin('');
     localStorage.removeItem('UserLogin');
   }
+  //menumobie
   return (
     <div className="Nav" style={{
       position: location.pathname.includes('/product') || location.pathname.includes('/giohang') ? 'static' : 'fixed',
@@ -199,6 +203,21 @@ function Nav({ Cart, setCart, soluong, removeProduct, removeAllProdcut, numberWi
               </Space>
             </div>
           </div>
+        </div>
+      </div>
+      <div className='nav-item-mobie'>
+        <h1 style={styleNava}> <MenuOutlined style={{ padding: 12 }} /></h1>
+        <div className='nav-item-mobie-item'>
+          <NavLink to='/'>
+            <p className='nav-active' style={{ color: '#000',margin:'0px' }} href="/#">Trang chủ</p>
+          </NavLink>
+          <a  onClick={hanldeShowCart} style={{ color: "#000"}}>
+             Giỏ hàng
+          </a>
+            <a onClick={() => hanldeShowProductFilter('váy')}>Váy thời trang</a>
+            <a onClick={() => hanldeShowProductFilter('đầm')} >Đầm thời trang</a>
+            <a onClick={() => hanldeShowProductFilter('set')} >Các set thời trang</a>
+            <a onClick={() => hanldeShowProductFilter('áo')} >Các mẫu áo</a>
         </div>
       </div>
       <div className="nav-item">
