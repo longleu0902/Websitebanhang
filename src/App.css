@@ -61,6 +61,8 @@ h1 {
 .nav-item-mobie-item p:hover{
   background-color: #ccc;
   text-decoration: none;
+  border: none;
+
 }
 .nav-item-mobie:hover .nav-item-mobie-item {
   display: flex;
@@ -85,6 +87,8 @@ h1 {
 
 .nav-active:hover {
   border-bottom: 2px solid;
+  border: none;
+  text-decoration: none;
 
 }
 
@@ -1029,6 +1033,9 @@ h1 {
 
 /* responsive  */
 @media (min-width:0px) and (max-width:695px) {
+  .CTN {
+    margin: 0 15px;
+  }
 
   /* nav  */
   .nav-item {
@@ -1037,9 +1044,6 @@ h1 {
 
   .nav-item-mobie {
     display: block;
-  }
-  .search-show{
-    left: -24px;
   }
   .search-filter{
     width: 350px;
@@ -1093,6 +1097,36 @@ h1 {
   .formPay {
     bottom: 0;
   }
+  /* authform  */
+  .auth-form {
+    width: 300px;
+  }
+  .auth-form_input {
+    width: 250px;
+  }
+  .auth-form_controls {
+    display: none;
+  }
+  .auth-form_controls-mobie{
+    display: flex;
+    justify-content: space-around;
+    margin: 12px 0px;
+  }
+  .auth-form_socials{
+    padding: 24px 10px;
+  }
+  .auth-form_socials-title {
+    display: none;
+  }
+  .auth-form_container {
+    padding: 0 17px;
+}
+.auth-form_help{
+  justify-content: center;
+}
+.auth-form_header{
+  margin-top: 12px;
+}
 
   /* Footer */
   .Footer {

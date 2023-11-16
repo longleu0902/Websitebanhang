@@ -133,12 +133,16 @@ const AuthFormSignUp = ({ hanldeOpenSignup }) => {
                             </Space>
                         ) : ''}
                         <div style={{ marginBottom: 30 }} className="auth-form_controls">
-                            {/* <NavLink to='/giohang'> */}
                             <button onClick={() => hanldeOpenSignup(false)} className="btn btn-normal auth-form_controls-back">
                                 TRỞ LẠI
                             </button>
-                            {/* </NavLink> */}
                             <button onClick={handleAddUser} className="btn btn-normal btn-grey ">ĐĂNG KÍ</button>
+                        </div>
+                        <div style={{ marginBottom: 30 }} className="auth-form_controls-mobie">
+                            <button style={{border:'none', backgroundColor:'#ccc',color:'#fff',padding:'6px 20px',margin:'0 6px'}} onClick={() => hanldeOpenSignup(false)}>
+                                TRỞ LẠI
+                            </button>
+                            <button style={{border:'none', backgroundColor:'#999',color:'#fff',padding:'6px 20px',margin:'0 6px'}} onClick={handleAddUser}>ĐĂNG KÍ</button>
                         </div>
                     </div>
                 </div>

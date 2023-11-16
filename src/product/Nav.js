@@ -206,7 +206,7 @@ function Nav({ Cart, setCart, soluong, removeProduct, removeAllProdcut, numberWi
         </div>
       </div>
       <div className='nav-item-mobie'>
-        <h1 style={styleNava}> <MenuOutlined style={{ padding: 12 }} /></h1>
+        <h5 style={styleNava}> <MenuOutlined style={{ padding: 12 }} /></h5>
         <div className='nav-item-mobie-item'>
           <NavLink to='/'>
             <p className='nav-active' style={{ color: '#000',margin:'0px' }} href="/#">Trang chủ</p>

@@ -61,6 +61,12 @@ const AuthFormLogin = ({ notify,handleLoginUser,setUserPasswordLogin,setUserName
                             </button>
                             <button onClick={handleLoginUser} className="btn btn-normal btn-grey ">ĐĂNG NHẬP</button>
                         </div>
+                        <div style={{ marginBottom: 30 }} className="auth-form_controls-mobie">
+                            <button style={{border:'none', backgroundColor:'#ccc',color:'#fff',padding:'6px 12px',margin:'12px 4px'}} onClick={() => hanldeOpenForm(false)}>
+                                TRỞ LẠI
+                            </button>
+                            <button style={{border:'none', backgroundColor:'#999',color:'#fff',padding:'6px 12px',margin:'12px 10px'}} onClick={handleLoginUser}>ĐĂNG NHẬP</button>
+                    </div>
                     </div>
                     <div className="auth-form_socials">
                         <button
