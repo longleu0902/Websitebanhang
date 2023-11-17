@@ -8,15 +8,25 @@ import * as Yup from 'yup';
 import { message } from 'antd';
 import ListDataService from "../Lists.services";
 import { db } from "../firebase-config";
+import {storage} from "../firebase-config"
+import { ref, uploadBytes ,getDownloadURL } from "firebase/storage";
 import { addDoc, collection, doc, deleteDoc, updateDoc } from 'firebase/firestore';
 // import type { SearchProps } from '../Search';
 const Post = ({ List, setList }) => {
     const [postFilter, setPostFiler] = useState('')
     const [messageApi, contextHolder] = message.useMessage();
     const [updatePrice, setUpdatePrice] = useState('')
+    const [upLoadImg,setUpLoadImg] = useState(null)
     const handleChange = (e) => {
         setPostFiler(e.target.value)
     }
+    const handleImageChange = (e) => {
+        if(e.target.files[0]){
+        setUpLoadImg(e.target.files[0])
+
+        }
+    }
+    // console.log(upLoadImg)
     const { Search } = Input;
 
     const suffix = (
@@ -35,18 +45,26 @@ const Post = ({ List, setList }) => {
     }
     const formik = useFormik({
         initialValues: {
-            img: '',
+            // img: '',
             title: '',
             price: '',
             sample: '',
             amount: 1,
+            files:'',
 
         },
         onSubmit: async (values) => {
+            // let photoURL = '';
+            // const storageRef = storage.ref()
+            // const imageRef = storageRef.child(`${Date.now()}_${upLoadImg.name}`);
+            // photoURL = await imageRef.getDownloadURL()
+
+            const add = {...values,file:'abc'}
+            console.log(add)
             try {
-                const docRef = await addDoc(collection(db, "Lists"), values);
+                const docRef = await addDoc(collection(db, "Lists"), add);
                 console.log("Document written with ID: ", docRef.id);
-                setList([...List, {...values, id: docRef.id} ]);
+                setList([...List, {...add, id: docRef.id} ]);
 
             } catch (e) {
                 console.error("Error adding document: ", e);
@@ -149,6 +167,10 @@ const Post = ({ List, setList }) => {
             </div>
             <button onClick={hanldeOpenForm} style={{ border: 'none' }}> + </button>
             {openForm && <form onSubmit={formik.handleSubmit}>
+            {/* <div className='mt-2'>
+                   <input type="file"
+                    onChange={handleImageChange}/>
+                </div> */}
                 <div className='mt-2'>
                     <Input
                         addonBefore='img'
