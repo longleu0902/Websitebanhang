@@ -2,31 +2,31 @@ import { useEffect, useState } from "react";
 import { Table } from "reactstrap";
 import { AudioOutlined } from '@ant-design/icons';
 import React from 'react';
-import { Input, Space } from 'antd';
+import { Input, Space  } from 'antd';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { message } from 'antd';
 import ListDataService from "../Lists.services";
 import { db } from "../firebase-config";
-import {storage} from "../firebase-config"
-import { ref, uploadBytes ,getDownloadURL } from "firebase/storage";
+import { storage } from "../firebase-config"
+import { ref, child, getDownloadURL, uploadBytes } from "firebase/storage";
 import { addDoc, collection, doc, deleteDoc, updateDoc } from 'firebase/firestore';
 // import type { SearchProps } from '../Search';
 const Post = ({ List, setList }) => {
     const [postFilter, setPostFiler] = useState('')
     const [messageApi, contextHolder] = message.useMessage();
     const [updatePrice, setUpdatePrice] = useState('')
-    const [upLoadImg,setUpLoadImg] = useState(null)
+    const [upLoadImg, setUpLoadImg] = useState(null)
+    const key = 'updatable';
     const handleChange = (e) => {
         setPostFiler(e.target.value)
     }
     const handleImageChange = (e) => {
-        if(e.target.files[0]){
-        setUpLoadImg(e.target.files[0])
+        if (e.target.files[0]) {
+            setUpLoadImg(e.target.files[0])
 
         }
     }
-    // console.log(upLoadImg)
     const { Search } = Input;
 
     const suffix = (
@@ -50,41 +50,50 @@ const Post = ({ List, setList }) => {
             price: '',
             sample: '',
             amount: 1,
-            files:'',
+            files: '',
 
         },
         onSubmit: async (values) => {
-            // let photoURL = '';
-            // const storageRef = storage.ref()
-            // const imageRef = storageRef.child(`${Date.now()}_${upLoadImg.name}`);
-            // photoURL = await imageRef.getDownloadURL()
-
-            const add = {...values,file:'abc'}
-            console.log(add)
             try {
-                const docRef = await addDoc(collection(db, "Lists"), add);
-                console.log("Document written with ID: ", docRef.id);
-                setList([...List, {...add, id: docRef.id} ]);
+                if (upLoadImg) {
+                    messageApi.open({
+                        key,
+                        type: 'loading',
+                        content: 'Đang thêm sản phẩm...',
+                      });
+                      setTimeout(() => {
+                        messageApi.open({
+                          key,
+                          type: 'success',
+                          content: 'Thêm sản phẩm thành công!',
+                          duration: 2,
+                        });
+                      }, 5000);
+                    const storageRef = ref(storage, `img/${values.title}`);
+                    await uploadBytes(storageRef, upLoadImg)
+                    const photoURL = await getDownloadURL(storageRef)
+                    // console.log('photoURL', photoURL)
+                    const add = { ...values, img: photoURL }
+                    // console.log(add)
+                    const docRef = await addDoc(collection(db, "Lists"), add);
+                    console.log("Document written with ID: ", docRef.id);
+                    setList([...List, { ...add, id: docRef.id }]);
+                }
 
             } catch (e) {
                 console.error("Error adding document: ", e);
             }
 
-            messageApi.open({
-                type: 'success',
-                content: 'Create succcessfully',
-            });
         },
         validationSchema: Yup.object().shape({
             title: Yup.string().required('Required'),
             sample: Yup.string().required('Required'),
             price: Yup.number().required('Required'),
             amount: Yup.number().required('Required'),
-            img: Yup.string().required('Required'),
         }),
     });
     const deleteProduct = async (id) => {
-        const ListRemove = List.filter((item)=> item.id !==id)
+        const ListRemove = List.filter((item) => item.id !== id)
         setList([...ListRemove])
         const productDoc = doc(db, "Lists", id);
         console.log(productDoc)
@@ -93,9 +102,9 @@ const Post = ({ List, setList }) => {
     const updateProduct = async (id) => {
         const ListUpdate = [...List]
         const productDoc = doc(db, "Lists", id);
-        const idx = ListUpdate.findIndex((item)=> item.id==id)
-        if(idx!== -1) {
-        ListUpdate[idx] = {...List[idx],  price: updatePrice }
+        const idx = ListUpdate.findIndex((item) => item.id == id)
+        if (idx !== -1) {
+            ListUpdate[idx] = { ...List[idx], price: updatePrice }
         }
         setList([...ListUpdate])
         await updateDoc(productDoc, { price: updatePrice });
@@ -103,6 +112,7 @@ const Post = ({ List, setList }) => {
 
     return (
         <div>
+            {contextHolder}
             <Search style={{ marginBottom: '30px' }} placeholder="input search text" onChange={handleChange} enterButton />
             <div style={{ height: "700px", overflow: 'scroll' }} >
                 <Table hover size="sm">
@@ -167,11 +177,7 @@ const Post = ({ List, setList }) => {
             </div>
             <button onClick={hanldeOpenForm} style={{ border: 'none' }}> + </button>
             {openForm && <form onSubmit={formik.handleSubmit}>
-            {/* <div className='mt-2'>
-                   <input type="file"
-                    onChange={handleImageChange}/>
-                </div> */}
-                <div className='mt-2'>
+                {/* <div className='mt-2'>
                     <Input
                         addonBefore='img'
                         placeholder='Enter your img product'
@@ -181,6 +187,10 @@ const Post = ({ List, setList }) => {
                         name='img'
                     />
                     <p style={{ color: 'red' }}>{formik.errors.img}</p>
+                </div> */}
+                <div className='mt-2'>
+                    <input type="file"
+                        onChange={handleImageChange} />
                 </div>
                 <div className='mt-2'>
                     <Input
@@ -228,6 +238,7 @@ const Post = ({ List, setList }) => {
                     <p style={{ color: 'red' }}>{formik.errors.amount}</p>
                 </div>
 
+
                 <div className='mt-2'>
                     {/* <Button type='primary'>Add Product</Button> */}
                     <button type='submit'>
@@ -235,6 +246,7 @@ const Post = ({ List, setList }) => {
                     </button>
                 </div>
             </form>}
+
 
 
         </div>
