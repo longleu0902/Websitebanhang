@@ -26,7 +26,7 @@ const AuthFormLogin = ({ notify,handleLoginUser,setUserPasswordLogin,setUserName
                             </div>
                             <div className="auth-form_group">
                                 <input
-                                    type="text"
+                                    type="password"
                                     placeholder="Mật khẩu của bạn"
                                     className="auth-form_input"
                                     onChange={(e)=>setUserPasswordLogin(e.target.value)}
