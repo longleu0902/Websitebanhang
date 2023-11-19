@@ -1070,6 +1070,12 @@ h1 {
 
   .showproduct-img {
     width: 100%;
+    margin: 0px -5px;
+  }
+  .showproduct-info{
+    border: 1px solid #000;
+    height: 530px;
+    padding: 12px 12px;
   }
 
   .showproduct-info {
@@ -1184,6 +1190,7 @@ h1 {
   .showproduct-info {
     margin-left: 40px;
   }
+  
 
   /* CartList  */
   .guide {
