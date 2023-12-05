@@ -83,6 +83,11 @@ const LoginAd = () => {
               Log in
             </Button>
           </Form.Item>
+          <Form.Item>
+            <p type="primary" htmlType="submit" className="login-form-button">
+              User:admin@gmail.com pass:123456
+            </p>
+          </Form.Item>
         </Form>
       </div>
 
